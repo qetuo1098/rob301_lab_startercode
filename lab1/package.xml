@@ -1,17 +1,13 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>lab1</name>
-  <version>1.2.0</version>
+  <version>1.0.0</version>
   <description>
-    Starter code for Lab 2 of ROB 301: Introduction to Robotics.
+    Starter code for Lab 1 of ROB 301: Introduction to Robotics.
   </description>
   <license>Apache 2.0</license>
   <author email="yuxuansherry.chen@mail.utoronto.ca">sherry</author>
   <maintainer email="yuxuansherry.chen@mail.utoronto.ca">sherry</maintainer>
-  <url type="website">http://wiki.ros.org/turtlebot3_example</url>
-  <url type="emanual">http://turtlebot3.robotis.com</url>
-  <url type="repository">https://github.com/ROBOTIS-GIT/turtlebot3</url>
-  <url type="bugtracker">https://github.com/ROBOTIS-GIT/turtlebot3/issues</url>
   <buildtool_depend>catkin</buildtool_depend>
   <depend>rospy</depend>
   <depend>std_msgs</depend>
