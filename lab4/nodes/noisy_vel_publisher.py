@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""Add noise to cmd_vel for use in simulation."""
 import rospy
 import time
 from sensor_msgs.msg import LaserScan
