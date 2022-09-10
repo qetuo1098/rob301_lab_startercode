@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import rospy
 import math
-import time
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String, UInt32MultiArray
 import numpy as np
