@@ -4,7 +4,7 @@ import math
 from nav_msgs.msg import Odometry
 
 
-def get_yaw_from_quarternion(q):
+def get_yaw_from_quaternion(q):
     siny_cosp = 2 * (q.w * q.z + q.x * q.y)
     cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z)
     yaw = math.atan2(siny_cosp, cosy_cosp)
