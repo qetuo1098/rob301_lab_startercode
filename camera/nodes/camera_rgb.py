@@ -1,16 +1,10 @@
 #!/usr/bin/env python
-
-"""
-Get mean color (r, g, b) value and publish to /mean_img_rgb
-"""
-
-import roslib
-import sys
+"""Get mean color (r, g, b) value and publish to /mean_img_rgb"""
 import rospy
-import numpy as np
 from std_msgs.msg import UInt32MultiArray
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
+import numpy as np
 
 
 class CameraRGB(object):
@@ -21,11 +15,11 @@ class CameraRGB(object):
         self.camera_subscriber = rospy.Subscriber(
             "raspicam_node/image", Image, self.camera_callback, queue_size=1
         )
+        self.bridge = bridge = CvBridge()
 
     def camera_callback(self, msg):
-        bridge = CvBridge()
         try:
-            rgb_cv_img = bridge.imgmsg_to_cv2(msg, "rgb8")
+            rgb_cv_img = self.bridge.imgmsg_to_cv2(msg, "rgb8")
         except CvBridgeError as e:
             print(e)
 

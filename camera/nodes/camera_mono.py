@@ -1,27 +1,22 @@
 #!/usr/bin/env python
-
-import roslib
-import sys
 import rospy
-import numpy as np
 from std_msgs.msg import UInt32
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
+import numpy as np
 
 
 class CameraMono(object):
     def __init__(self):
-        self.color_sensor_publisher = rospy.Publisher(
-            "color_mono", UInt32, queue_size=1
-        )
+        self.line_idx_pub = rospy.Publisher("line_idx", UInt32, queue_size=1)
         self.camera_subscriber = rospy.Subscriber(
             "raspicam_node/image", Image, self.camera_callback, queue_size=1
         )
+        self.bridge = CvBridge()
 
     def camera_callback(self, data):
-        bridge = CvBridge()
         try:
-            cv_img = bridge.imgmsg_to_cv2(data, "mono8")
+            cv_img = self.bridge.imgmsg_to_cv2(data, "mono8")
         except CvBridgeError as e:
             print(e)
 
@@ -30,17 +25,18 @@ class CameraMono(object):
         mid = len(array) // 2
         array = array[100:300]
         array = np.mean(array, axis=0)
+
+        # TODO what is going on here? probably can be optimized/cleaned up
         new_array = []
         for i in range(5, len(array) - 6):
             new_array.append(np.mean(array[i - 5 : i + 5]))
         index = np.argmax(new_array)
 
-        self.color_sensor_publisher.publish(index)
-        print(index)
+        self.line_idx_pub.publish(index)
 
 
 def main():
-    rospy.init_node("camera_rgb")
+    rospy.init_node("camera_mono")
     camera = CameraMono()
     rospy.spin()
 
