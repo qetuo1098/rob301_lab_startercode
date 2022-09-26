@@ -20,13 +20,11 @@ class CameraMono(object):
         except CvBridgeError as e:
             print(e)
 
-        array = cv_img
+        # average each column (removing some rows): result is a 640 length array
+        array = np.mean(cv_img[100:300, :], axis=0)
 
-        mid = len(array) // 2
-        array = array[100:300]
-        array = np.mean(array, axis=0)
-
-        # TODO what is going on here? probably can be optimized/cleaned up
+        # moving window filter
+        # TODO can we optimize this?
         new_array = []
         for i in range(5, len(array) - 6):
             new_array.append(np.mean(array[i - 5 : i + 5]))

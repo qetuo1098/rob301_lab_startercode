@@ -1,3 +1,9 @@
 <launch>
-  <node pkg="camera" type="camera.py" name="camera" output="screen"></node>
+  <!-- Launch camera driver -->
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_rpicamera.launch" >
+  </include>
+
+  <!-- ROB 301 image processing nodes -->
+  <node pkg="camera" type="camera_mono.py" name="camera_mono" output="screen" required="true"></node>
+  <node pkg="camera" type="camera_rgb.py" name="camera_rgb" output="screen" required="true"></node>
 </launch>
