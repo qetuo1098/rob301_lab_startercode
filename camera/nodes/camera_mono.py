@@ -30,14 +30,8 @@ class CameraMono(object):
         c = np.cumsum(np.insert(x, 0, 0))
         a = (c[w:] - c[:-w]) / w
 
-        # add r because we removed r elements doing the averaging
+        # add r because we removed r elements on each side of the array doing the averaging
         idx = np.argmax(a) + r
-
-        # TODO can we optimize this?
-        # new_array = []
-        # for i in range(5, len(array) - 6):
-        #     new_array.append(np.mean(array[i - 5 : i + 5]))
-        # index = np.argmax(new_array)
 
         self.line_idx_pub.publish(idx)
 
