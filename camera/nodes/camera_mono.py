@@ -15,16 +15,17 @@ class CameraMono(object):
         )
         self.bridge = CvBridge()
 
-    def camera_callback(self, data):
+    def camera_callback(self, msg):
         try:
-            cv_img = self.bridge.imgmsg_to_cv2(data, "mono8")
+            cv_img = self.bridge.imgmsg_to_cv2(msg, "mono8")
         except CvBridgeError as e:
             print(e)
 
         # average each column (removing some rows): result is a 640 length array
         x = np.mean(cv_img[100:300, :], axis=0)
 
-        # moving window filter
+        # efficient moving window filter
+        # see <https://stackoverflow.com/a/27681394>
         r = 5
         w = 2 * r + 1  # total filter width
         c = np.cumsum(np.insert(x, 0, 0))
