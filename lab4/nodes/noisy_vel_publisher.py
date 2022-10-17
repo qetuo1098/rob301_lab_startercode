@@ -3,8 +3,6 @@
 import rospy
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String
-
-import math
 import numpy as np
 
 
@@ -24,7 +22,7 @@ class NoiseMaker(object):
 
 
 if __name__ == "__main__":
-    rospy.init_node("noisyvel")
+    rospy.init_node("noisy_vel_publisher")
 
     mu_noise = 0.0  # mean
     std_noise = 0.01  # standard deviation
