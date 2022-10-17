@@ -1,0 +1,7 @@
+<!-- Convenience launch file to run all required nodes at once.
+MUST BE RUN ONBOARD THE TURTLEBOT -->
+<launch>
+  <include file="$(find camera)/launch/camera.launch"></include>
+  <node pkg="lab4" type="scan_angle_publisher.py" name="scan_angle_publisher" output="log" required="true"></node>
+  <node pkg="lab4" type="noisy_vel_publisher.py" name="noisy_vel_publisher" output="screen" required="true"></node>
+</launch>
