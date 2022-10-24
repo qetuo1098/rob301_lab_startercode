@@ -18,12 +18,12 @@ class ScanAnglePublisher(object):
         # computes the y-distance to each measurement
         y_range = in_range * np.sin(angles)
 
-        # filter out measurements with ranges outside of [0.1, 3]m or y_range
+        # filter out measurements with ranges outside of [0.1, 2]m or y_range
         # outside of [0.5, 0.65]m
         # note that the range is 0 when no valid range is obtained: this is
         # filtered out by the 0.1m lower bound
         angles = angles[
-            (0.5 <= y_range) & (y_range <= 0.65) & (0.1 <= in_range) & (in_range <= 3)
+            (0.5 <= y_range) & (y_range <= 0.65) & (0.1 <= in_range) & (in_range <= 2)
         ]
 
         # if no valid measurements, don't publish anything
