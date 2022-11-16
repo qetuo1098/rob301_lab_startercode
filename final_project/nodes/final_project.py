@@ -2,7 +2,7 @@
 import rospy
 import math
 from geometry_msgs.msg import Twist
-from std_msgs.msg import String, UInt32MultiArray
+from std_msgs.msg import UInt32, Float64MultiArray
 import numpy as np
 import colorsys
 
@@ -10,9 +10,9 @@ import colorsys
 class BayesLoc:
     def __init__(self, p0, colour_codes, colour_map):
         self.colour_sub = rospy.Subscriber(
-            "mean_img_rgb", UInt32MultiArray, self.colour_callback
+            "mean_img_rgb", Float64MultiArray, self.colour_callback
         )
-        self.line_sub = rospy.Subscriber("line_idx", String, self.line_callback)
+        self.line_sub = rospy.Subscriber("line_idx", UInt32, self.line_callback)
         self.cmd_pub = rospy.Publisher("cmd_vel", Twist, queue_size=1)
 
         self.num_states = len(p0)
