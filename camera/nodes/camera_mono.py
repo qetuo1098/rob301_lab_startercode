@@ -32,7 +32,7 @@ class CameraMono(object):
         a = (c[w:] - c[:-w]) / w
 
         # add r because we removed r elements on each side of the array doing the averaging
-        idx = np.argmin(a) + r
+        idx = np.argmax(a) + r
 
         self.line_idx_pub.publish(idx)
 
